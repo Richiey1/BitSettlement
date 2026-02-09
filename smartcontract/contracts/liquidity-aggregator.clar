@@ -2,25 +2,28 @@
 ;; Aggregates liquidity from multiple sources
 
 (define-constant contract-owner tx-sender)
-(define-data-var total-aggregated uint u0)
+(define-constant err-unauthorized (err u100))
 
-(define-map liquidity-sources principal uint)
+(define-data-var total-volume uint u0)
 
-(define-read-only (get-total-liquidity)
-  (var-get total-aggregated)
-)
-
-(define-public (add-liquidity-source (source principal) (amount uint))
-  (begin
-    (map-set liquidity-sources source amount)
-    (var-set total-aggregated (+ (var-get total-aggregated) amount))
-    (ok amount)
+;; Trait for any DEX integration
+(define-trait dex-trait
+  (
+    (swap (uint uint) (response uint uint))
   )
 )
 
-(define-public (aggregate-swap (amount uint))
-  (begin
-    (asserts! (>= (var-get total-aggregated) amount) (err u100))
-    (ok amount)
+(define-read-only (get-total-volume)
+  (var-get total-volume)
+)
+
+;; Core Swap Function
+;; routes trade to specific DEX
+(define-public (router-swap (amount uint) (min-out uint) (dex <dex-trait>))
+  (let (
+      (swapped-amount (unwrap! (contract-call? dex swap amount min-out) (err u101)))
+    )
+    (var-set total-volume (+ (var-get total-volume) amount))
+    (ok swapped-amount)
   )
 )
