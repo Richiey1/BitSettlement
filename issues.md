@@ -1,72 +1,88 @@
-# Project Roadmap & Issues - BitAggregator 🌊
+# Project Roadmap & Issues - Stacks Fund
 
-This document tracks the development of the BitAggregator DEX router, including smart contracts and frontend integration.
-
----
-
-## 🚀 Priority: Critical
-
-### Issue #1: Core Router Swap Function
-**Status:** ✅ COMPLETED
-**Description:** Implement the base router-swap function that accepts a DEX trait and executes a trade.
-- **Tasks:**
-  - [x] Define `dex-trait`.
-  - [x] Implement `router-swap` function.
-  - [x] Add slippage protection (`min-out`).
-
-### Issue #2: Frontend Hook Setup
-**Status:** ✅ COMPLETED
-**Description:** Scaffold the `useAggregator` hook for frontend interactions.
-- **Tasks:**
-  - [x] Create `use-aggregator.ts`.
-  - [x] Implement basic swap function stub.
-
-### Issue #3: Multi-Hop Routing
-**Status:** ❌ PENDING
-**Description:** Enable routing trades through multiple pools (e.g., STX -> USDA -> sBTC).
-- **Tasks:**
-  - [ ] Update `router-swap` to accept a list of traits (or use a multi-hop contract pattern).
-  - [ ] Implement path finding algorithm off-chain.
+This document tracks the development of the Stacks Fund governance and crowdfunding platform.
 
 ---
 
-## 🛠️ Smart Contract Tasks
+## Phase 1: Core Contracts
 
-### Issue #4: Gas Estimation
-**Status:** ❌ PENDING
-**Description:** Estimate gas costs for complex routes to ensure profitability.
+### Issue #1: Voting & Governance Contract
+**Status:** COMPLETED
+**Description:** Implement barrier-free governance with proposals, voting, and finalization.
 - **Tasks:**
-  - [ ] Add `estimate-swap` read-only function.
+  - [x] Implement `create-proposal` with category and quorum support
+  - [x] Implement `vote` (yes/no) with double-vote prevention
+  - [x] Implement `vote-abstain` for quorum contribution without yes/no
+  - [x] Implement `finalize-proposal` with quorum and majority check
+  - [x] Implement `cancel-proposal` for creator
+  - [x] Add transparent vote records and voter stats tracking
+  - [x] Add Clarity 4 `to-ascii?` proposal summaries
 
-### Issue #5: Fee Collection
-**Status:** ❌ PENDING
-**Description:** Collect a small protocol fee on each swap.
+### Issue #2: Crowdfunding Campaign Contract
+**Status:** COMPLETED
+**Description:** Full crowdfunding lifecycle with auto-success and refund mechanics.
 - **Tasks:**
-  - [ ] Implement fee logic in `router-swap`.
-  - [ ] Add `withdraw-fees` function for admin.
+  - [x] Implement `create-campaign` with goal and category support
+  - [x] Implement `contribute` with auto-success on goal reached
+  - [x] Implement `withdraw-funds` for successful campaigns
+  - [x] Implement `claim-refund` for failed/expired/cancelled campaigns
+  - [x] Implement `cancel-campaign` for creator
+  - [x] Add backer and creator global stats tracking
+  - [x] Add indexed contributor enumeration
+
+### Issue #3: Milestone Tracker Contract
+**Status:** COMPLETED
+**Description:** Community-verified milestone system for campaign accountability.
+- **Tasks:**
+  - [x] Implement `add-milestone` with configurable approval threshold
+  - [x] Implement `start-milestone` for progress tracking
+  - [x] Implement `submit-evidence` with hash and description
+  - [x] Implement `approve-milestone` with auto-resolve at threshold
+  - [x] Implement `reject-milestone` with auto-resolve at threshold
+  - [x] Add reviewer reputation stats tracking
 
 ---
 
-## 🎨 Frontend Tasks
+## Phase 2: Frontend Integration
 
-### Issue #6: Swap Interface
-**Status:** ❌ PENDING
-**Description:** Create the main swap UI.
+### Issue #4: Governance Dashboard
+**Status:** PENDING
+**Description:** Connect frontend to governance contracts.
 - **Tasks:**
-  - [ ] Token selector modal.
-  - [ ] Amount input with balance display.
-  - [ ] Route visualization.
+  - [ ] Proposal creation and browsing UI
+  - [ ] Voting interface with real-time tallies
+  - [ ] Proposal finalization view
+  - [ ] Wallet connection (Leather/Xverse)
 
-### Issue #7: Slippage Settings
-**Status:** ❌ PENDING
-**Description:** Allow users to configure slippage tolerance.
+### Issue #5: Campaign Funding Interface
+**Status:** PENDING
+**Description:** Campaign creation, contribution, and progress tracking.
 - **Tasks:**
-  - [ ] Add settings modal.
-  - [ ] Implement auto/custom slippage toggle.
+  - [ ] Campaign listing with progress bars
+  - [ ] Contribution flow with amount input
+  - [ ] Milestone timeline with evidence display
+  - [ ] Refund claim interface
 
 ---
 
-## ✅ Completed Milestones
-- [x] Project Scaffold (Frontend + Contracts)
-- [x] Initial Contract Deployment Strategy
-- [x] Basic Documentation
+## Phase 3: Deployment
+
+### Issue #6: Testnet Deployment
+**Status:** PENDING
+- [ ] Deploy all 3 contracts to Stacks testnet
+- [ ] Test full governance -> funding -> milestone flow
+- [ ] Test refund mechanics on failed campaigns
+
+### Issue #7: Mainnet Deployment
+**Status:** PENDING
+- [ ] Audit contracts
+- [ ] Deploy to mainnet
+- [ ] Register on Talent Protocol
+
+---
+
+## Completed Milestones
+- [x] Project scaffold
+- [x] All 3 core contracts written (barrier-free, Clarity 4)
+- [x] Clarinet configuration updated
+- [x] Documentation updated
