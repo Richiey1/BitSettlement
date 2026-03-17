@@ -1,13 +1,23 @@
 [project]
-name = 'bit-aggregator'
-description = 'DEX Aggregator on Stacks'
+name = 'stacks-fund'
+description = 'Bitcoin-Native Community Funding & Governance on Stacks L2'
 authors = []
 telemetry = true
 cache_dir = './.cache'
 requirements = []
 
-[contracts.liquidity-aggregator]
-path = 'contracts/liquidity-aggregator.clar'
+[contracts.voting]
+path = 'contracts/voting.clar'
+clarity_version = 4
+epoch = '3.3'
+
+[contracts.crowdfunding-campaign]
+path = 'contracts/crowdfunding-campaign.clar'
+clarity_version = 4
+epoch = '3.3'
+
+[contracts.milestone-tracker]
+path = 'contracts/milestone-tracker.clar'
 clarity_version = 4
 epoch = '3.3'
 
