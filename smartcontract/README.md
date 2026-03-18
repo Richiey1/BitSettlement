@@ -1,6 +1,6 @@
 # Smart Contracts — Stacks Fund
 
-This directory contains the Clarity 4 smart contracts for Stacks Fund, a barrier-free community funding and governance platform on Bitcoin L2.
+This directory contains the Clarity 4 smart contracts for Stacks Fund, a  community funding and governance platform on Bitcoin L2.
 
 ## Contracts
 
@@ -13,7 +13,7 @@ A fully open governance system. Any wallet can create proposals, vote, and final
 - `vote-records` — Transparent vote choice per voter (for auditing)
 - `voter-stats` — Global voter participation stats
 
-**Write functions (all barrier-free):**
+**Write functions (all ):**
 - `create-proposal(title, description, category, duration-blocks, quorum)` — Start a governance proposal
 - `vote(proposal-id, support)` — Vote yes or no
 - `vote-abstain(proposal-id)` — Vote abstain (counts toward quorum)
@@ -37,7 +37,7 @@ A fully open crowdfunding system with auto-success detection and refund mechanic
 - `backer-stats` — Global backer career stats
 - `creator-stats` — Global creator career stats
 
-**Write functions (all barrier-free):**
+**Write functions (all ):**
 - `create-campaign(title, description, category, goal, duration-blocks)` — Launch a campaign
 - `contribute(campaign-id, amount)` — Back a campaign with STX (any amount)
 - `withdraw-funds(campaign-id)` — Creator claims after success
@@ -61,7 +61,7 @@ Community-verified milestone tracking for accountability and phased fund release
 - `milestone-votes` — Per-voter vote record (approve/reject with timestamp)
 - `reviewer-stats` — Global reviewer reputation stats
 
-**Write functions (all barrier-free):**
+**Write functions (all ):**
 - `add-milestone(campaign-id, description, amount-release, approval-threshold)` — Add a milestone
 - `start-milestone(campaign-id, milestone-id)` — Move to in-progress
 - `submit-evidence(campaign-id, milestone-id, evidence-hash, evidence-desc)` — Submit proof of completion

@@ -2,7 +2,7 @@
 
 **Bitcoin-Native Community Funding & Governance on Stacks L2**
 
-Stacks Fund is a fully barrier-free governance and crowdfunding platform built on Bitcoin via the Stacks blockchain. Propose ideas, vote on them, fund the winners, and track delivery through community-verified milestones — all without admin gates, gatekeepers, or minimum financial requirements.
+Stacks Fund is a fully  governance and crowdfunding platform built on Bitcoin via the Stacks blockchain. Propose ideas, vote on them, fund the winners, and track delivery through community-verified milestones — all without admin gates, gatekeepers, or minimum financial requirements.
 
 Any wallet can interact with every core function. No whitelists. No token-gating. Just connect and participate.
 
@@ -73,7 +73,7 @@ clarinet console
 ## Project Structure
 
 ```
-BitAggregator/
+StacksFund/
   smartcontract/
     contracts/
       voting.clar                  # Governance proposals and voting

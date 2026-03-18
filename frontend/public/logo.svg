@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Background rounded rect -->
+  <rect width="64" height="64" rx="14" fill="#052e16"/>
+  <!-- Ascending bars -->
+  <rect x="7" y="46" width="11" height="12" rx="2" fill="#10B981" opacity="0.55"/>
+  <rect x="21" y="36" width="11" height="22" rx="2" fill="#10B981" opacity="0.8"/>
+  <rect x="35" y="24" width="11" height="34" rx="2" fill="#F97316"/>
+  <!-- Upward arrow -->
+  <path d="M52 8 L58 18 L55 18 L55 36 L49 36 L49 18 L46 18 Z" fill="#F97316"/>
+  <!-- Coin circle (path, no text) — Bitcoin-style circle with cross-bar paths -->
+  <circle cx="52" cy="6" r="8" fill="none" stroke="#F97316" stroke-width="1.5"/>
+  <circle cx="52" cy="6" r="5" fill="#F97316" opacity="0.2"/>
+  <!-- Coin inner B-like paths -->
+  <path d="M50 2.5 L50 9.5 M50 2.5 L53 2.5 Q55 2.5 55 4.5 Q55 6 53 6 Q55.5 6 55.5 8 Q55.5 9.5 53 9.5 L50 9.5 M50 6 L53 6" stroke="#F97316" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -8,7 +8,7 @@ This document tracks the development of the Stacks Fund governance and crowdfund
 
 ### Issue #1: Voting & Governance Contract
 **Status:** COMPLETED
-**Description:** Implement barrier-free governance with proposals, voting, and finalization.
+**Description:** Implement  governance with proposals, voting, and finalization.
 - **Tasks:**
   - [x] Implement `create-proposal` with category and quorum support
   - [x] Implement `vote` (yes/no) with double-vote prevention
@@ -83,6 +83,6 @@ This document tracks the development of the Stacks Fund governance and crowdfund
 
 ## Completed Milestones
 - [x] Project scaffold
-- [x] All 3 core contracts written (barrier-free, Clarity 4)
+- [x] All 3 core contracts written (, Clarity 4)
 - [x] Clarinet configuration updated
 - [x] Documentation updated

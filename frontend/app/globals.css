@@ -5,49 +5,47 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-companion: var(--companion);
+  --color-companion-foreground: var(--companion-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
-  
+  --color-card: var(--card);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 :root {
-  /* Light Mode (Default) */
   --background: #ffffff;
-  --foreground: #1c1c1c;
-  
-  /* Stacks Orange */
-  --primary: #F97316; 
+  --foreground: #052e16;
+  --primary: #F97316;
   --primary-foreground: #ffffff;
-  
-  --secondary: #F3F4F6; /* slate-100 */
-  --secondary-foreground: #1c1c1c;
-  
-  --muted: #F3F4F6;
-  --muted-foreground: #6B7280; /* slate-500 */
-  
-  --border: #E5E7EB; /* slate-200 */
+  --companion: #10B981;
+  --companion-foreground: #ffffff;
+  --secondary: #ECFDF5;
+  --secondary-foreground: #052e16;
+  --muted: #ECFDF5;
+  --muted-foreground: #6B7280;
+  --border: #A7F3D0;
+  --card: #ffffff;
 }
 
 [data-theme="dark"] {
-  /* Dark Mode */
-  --background: #0F172A; /* slate-900 */
-  --foreground: #F9FAFB; /* slate-50 */
-  
-  --primary: #F97316; /* Stacks Orange */
+  --background: #052e16;
+  --foreground: #F0FDF4;
+  --primary: #F97316;
   --primary-foreground: #ffffff;
-  
-  --secondary: #1E293B; /* slate-800 */
-  --secondary-foreground: #F9FAFB;
-  
-  --muted: #1E293B;
-  --muted-foreground: #94A3B8; /* slate-400 */
-  
-  --border: #334155; /* slate-700 */
+  --companion: #34D399;
+  --companion-foreground: #052e16;
+  --secondary: #064E3B;
+  --secondary-foreground: #F0FDF4;
+  --muted: #064E3B;
+  --muted-foreground: #6EE7B7;
+  --border: #065F46;
+  --card: #064E3B;
 }
 
 body {
@@ -56,3 +54,25 @@ body {
   font-family: var(--font-sans), sans-serif;
   transition: background-color 0.3s, color 0.3s;
 }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes coin-rise {
+  0% { transform: translateY(0) scale(1); opacity: 0.8; }
+  100% { transform: translateY(-44px) scale(0.4); opacity: 0; }
+}
+@keyframes bar-grow {
+  from { transform: scaleY(0); transform-origin: bottom; }
+  to { transform: scaleY(1); transform-origin: bottom; }
+}
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-float { animation: float 5s ease-in-out infinite; }
+.animate-coin-rise { animation: coin-rise 2.2s ease-out infinite; }
+.animate-bar-grow { animation: bar-grow 1s ease-out forwards; }
+.animate-slide-up { animation: slide-up 0.6s ease-out forwards; }
