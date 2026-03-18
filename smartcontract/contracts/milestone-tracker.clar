@@ -1,5 +1,5 @@
 ;; =============================================
-;; STACKS FUND — Milestone Tracker Contract
+;; STACKS FUND -- Milestone Tracker Contract
 ;; =============================================
 ;; A fully barrier-free milestone tracking and accountability system.
 ;; Any wallet can create milestones, submit evidence, vote to approve,
@@ -12,15 +12,11 @@
 ;; Constants
 ;; -----------------------------------------------
 (define-constant ERR-MILESTONE-NOT-FOUND (err u300))
-(define-constant ERR-CAMPAIGN-NOT-FOUND (err u301))
 (define-constant ERR-NOT-CREATOR (err u302))
 (define-constant ERR-INVALID-STATUS (err u303))
 (define-constant ERR-ALREADY-VOTED (err u304))
 (define-constant ERR-SELF-APPROVE (err u305))
 (define-constant ERR-EMPTY-DESCRIPTION (err u306))
-(define-constant ERR-INVALID-AMOUNT (err u307))
-(define-constant ERR-THRESHOLD-NOT-MET (err u308))
-(define-constant ERR-ALREADY-RELEASED (err u309))
 (define-constant ERR-EMPTY-EVIDENCE (err u310))
 
 ;; Milestone status
@@ -79,10 +75,10 @@
 )
 
 ;; -----------------------------------------------
-;; Public Functions — ALL BARRIER-FREE
+;; Public Functions -- ALL BARRIER-FREE
 ;; -----------------------------------------------
 
-;; Add a milestone to a campaign — any wallet can create milestones
+;; Add a milestone to a campaign -- any wallet can create milestones
 ;; amount-release: STX to release on approval (tracked, not held here)
 ;; approval-threshold: number of approvals needed (u0 defaults to u3)
 (define-public (add-milestone
@@ -129,7 +125,7 @@
   )
 )
 
-;; Start work on a milestone — milestone creator moves it to in-progress
+;; Start work on a milestone -- milestone creator moves it to in-progress
 (define-public (start-milestone (campaign-id uint) (milestone-id uint))
   (let (
     (milestone (unwrap! (map-get? milestones { campaign-id: campaign-id, milestone-id: milestone-id }) ERR-MILESTONE-NOT-FOUND))
@@ -151,7 +147,7 @@
   )
 )
 
-;; Submit evidence of completion — milestone creator provides proof
+;; Submit evidence of completion -- milestone creator provides proof
 (define-public (submit-evidence
     (campaign-id uint)
     (milestone-id uint)
@@ -185,7 +181,7 @@
   )
 )
 
-;; Approve a milestone — any wallet can vote to approve (except milestone creator)
+;; Approve a milestone -- any wallet can vote to approve (except milestone creator)
 ;; Each wallet can only vote once per milestone
 (define-public (approve-milestone (campaign-id uint) (milestone-id uint))
   (let (
@@ -238,7 +234,7 @@
   )
 )
 
-;; Reject a milestone — any wallet can vote to reject (except milestone creator)
+;; Reject a milestone -- any wallet can vote to reject (except milestone creator)
 (define-public (reject-milestone (campaign-id uint) (milestone-id uint))
   (let (
     (milestone (unwrap! (map-get? milestones { campaign-id: campaign-id, milestone-id: milestone-id }) ERR-MILESTONE-NOT-FOUND))

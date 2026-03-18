@@ -1,5 +1,5 @@
 ;; =============================================
-;; STACKS FUND — Voting & Governance Contract
+;; STACKS FUND -- Voting & Governance Contract
 ;; =============================================
 ;; A fully barrier-free governance system on Bitcoin L2.
 ;; Any wallet can create proposals, vote on them, and finalize results.
@@ -18,7 +18,6 @@
 (define-constant ERR-INVALID-DURATION (err u106))
 (define-constant ERR-ALREADY-FINALIZED (err u107))
 (define-constant ERR-NOT-CREATOR (err u108))
-(define-constant ERR-PROPOSAL-CANCELLED (err u109))
 
 ;; Status
 (define-constant STATUS-ACTIVE u0)
@@ -78,10 +77,10 @@
 ;; u0 = no, u1 = yes, u2 = abstain
 
 ;; -----------------------------------------------
-;; Public Functions — ALL BARRIER-FREE
+;; Public Functions -- ALL BARRIER-FREE
 ;; -----------------------------------------------
 
-;; Create a proposal — any wallet can call
+;; Create a proposal -- any wallet can call
 ;; quorum: minimum total votes needed to finalize (u0 defaults to u1)
 (define-public (create-proposal
     (title (string-ascii 64))
@@ -136,7 +135,7 @@
   )
 )
 
-;; Vote on a proposal — any wallet can call
+;; Vote on a proposal -- any wallet can call
 ;; support: true = yes, false = no
 (define-public (vote (proposal-id uint) (support bool))
   (let (
@@ -184,7 +183,7 @@
   )
 )
 
-;; Vote abstain — any wallet can call (counts toward quorum but not yes/no)
+;; Vote abstain -- any wallet can call (counts toward quorum but not yes/no)
 (define-public (vote-abstain (proposal-id uint))
   (let (
     (proposal (unwrap! (map-get? proposals proposal-id) ERR-PROPOSAL-NOT-FOUND))
@@ -214,11 +213,10 @@
   )
 )
 
-;; Finalize a proposal after voting ends — any wallet can trigger
+;; Finalize a proposal after voting ends -- any wallet can trigger
 (define-public (finalize-proposal (proposal-id uint))
   (let (
     (proposal (unwrap! (map-get? proposals proposal-id) ERR-PROPOSAL-NOT-FOUND))
-    (total-meaningful-votes (+ (get yes-votes proposal) (get no-votes proposal)))
   )
     (asserts! (is-eq (get status proposal) STATUS-ACTIVE) ERR-ALREADY-FINALIZED)
     (asserts! (>= stacks-block-height (get end-block proposal)) ERR-PROPOSAL-STILL-ACTIVE)
@@ -259,7 +257,7 @@
   )
 )
 
-;; Cancel a proposal — creator only, only while active
+;; Cancel a proposal -- creator only, only while active
 (define-public (cancel-proposal (proposal-id uint))
   (let (
     (proposal (unwrap! (map-get? proposals proposal-id) ERR-PROPOSAL-NOT-FOUND))

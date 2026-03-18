@@ -1,5 +1,5 @@
 ;; =============================================
-;; STACKS FUND — Crowdfunding Campaign Contract
+;; STACKS FUND -- Crowdfunding Campaign Contract
 ;; =============================================
 ;; A fully barrier-free crowdfunding system on Bitcoin L2.
 ;; Any wallet can create campaigns, contribute, withdraw funds, or claim refunds.
@@ -10,7 +10,6 @@
 ;; -----------------------------------------------
 ;; Constants
 ;; -----------------------------------------------
-(define-constant CONTRACT-ADDR (as-contract tx-sender))
 (define-constant ERR-CAMPAIGN-NOT-FOUND (err u200))
 (define-constant ERR-NOT-CREATOR (err u201))
 (define-constant ERR-CAMPAIGN-NOT-ACTIVE (err u202))
@@ -25,7 +24,6 @@
 (define-constant ERR-EMPTY-TITLE (err u211))
 (define-constant ERR-EMPTY-DESCRIPTION (err u212))
 (define-constant ERR-CAMPAIGN-ALREADY-ENDED (err u213))
-(define-constant ERR-TRANSFER-FAILED (err u214))
 
 ;; Status
 (define-constant STATUS-ACTIVE u0)
@@ -36,6 +34,7 @@
 ;; -----------------------------------------------
 ;; Data Variables
 ;; -----------------------------------------------
+(define-constant CONTRACT-ADDRESS .crowdfunding-campaign)
 (define-data-var campaign-counter uint u0)
 (define-data-var total-raised uint u0)
 (define-data-var total-campaigns-funded uint u0)
@@ -85,10 +84,10 @@
 )
 
 ;; -----------------------------------------------
-;; Public Functions — ALL BARRIER-FREE
+;; Public Functions -- ALL BARRIER-FREE
 ;; -----------------------------------------------
 
-;; Create a campaign — any wallet can call
+;; Create a campaign -- any wallet can call
 ;; goal: target amount in microSTX (even u1 is valid)
 (define-public (create-campaign
     (title (string-ascii 64))
@@ -141,7 +140,7 @@
   )
 )
 
-;; Contribute to a campaign — any wallet can call
+;; Contribute to a campaign -- any wallet can call
 ;; amount: in microSTX (even u1 is valid)
 (define-public (contribute (campaign-id uint) (amount uint))
   (let (
@@ -155,7 +154,7 @@
     (asserts! (< stacks-block-height (get deadline-block campaign)) ERR-CAMPAIGN-EXPIRED)
 
     ;; Transfer STX to contract
-    (try! (stx-transfer? amount tx-sender CONTRACT-ADDR))
+    (try! (stx-transfer? amount tx-sender CONTRACT-ADDRESS))
 
     ;; Track contribution
     (map-set contributions { campaign-id: campaign-id, contributor: tx-sender } (+ existing amount))
@@ -197,7 +196,7 @@
   )
 )
 
-;; Withdraw funds — creator claims after campaign succeeds
+;; Withdraw funds -- creator claims after campaign succeeds
 (define-public (withdraw-funds (campaign-id uint))
   (let (
     (campaign (unwrap! (map-get? campaigns campaign-id) ERR-CAMPAIGN-NOT-FOUND))
@@ -207,7 +206,7 @@
     (asserts! (not (get funds-withdrawn campaign)) ERR-FUNDS-ALREADY-WITHDRAWN)
 
     (map-set campaigns campaign-id (merge campaign { funds-withdrawn: true }))
-    (try! (as-contract (stx-transfer? amount tx-sender (get creator campaign))))
+    (try! (stx-transfer? amount CONTRACT-ADDRESS (get creator campaign)))
 
     ;; Update creator stats
     (let ((stats (default-to { campaigns-created: u0, campaigns-funded: u0, total-raised: u0 }
@@ -229,7 +228,7 @@
   )
 )
 
-;; Claim refund — backer reclaims if campaign failed or expired without reaching goal
+;; Claim refund -- backer reclaims if campaign failed or expired without reaching goal
 (define-public (claim-refund (campaign-id uint))
   (let (
     (campaign (unwrap! (map-get? campaigns campaign-id) ERR-CAMPAIGN-NOT-FOUND))
@@ -248,7 +247,7 @@
 
     ;; Delete contribution to prevent double-refund
     (map-delete contributions { campaign-id: campaign-id, contributor: tx-sender })
-    (try! (as-contract (stx-transfer? contribution tx-sender tx-sender)))
+    (try! (stx-transfer? contribution CONTRACT-ADDRESS tx-sender))
 
     ;; Update backer stats
     (let ((stats (default-to { campaigns-backed: u0, total-contributed: u0, total-refunded: u0 }
@@ -269,7 +268,7 @@
   )
 )
 
-;; Cancel campaign — creator only, only while active
+;; Cancel campaign -- creator only, only while active
 (define-public (cancel-campaign (campaign-id uint))
   (let (
     (campaign (unwrap! (map-get? campaigns campaign-id) ERR-CAMPAIGN-NOT-FOUND))
@@ -350,3 +349,5 @@
     ERR-CAMPAIGN-NOT-FOUND
   )
 )
+
+;; Initialize contract principal
