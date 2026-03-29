@@ -5,27 +5,27 @@ stacks-node: https://api.hiro.so
 bitcoin-node: http://blockstack:blockstacksystem@bitcoin.blockstack.com:8332
 plan:
   batches:
-  - id: 0
-    transactions:
-    - transaction-type: contract-publish
-      contract-name: SF-crowdfunding-campaign
-      expected-sender: SP258BY8D71JCTV73A4V3ADPHCVWSBEM6G4FETPYF
-      cost: 4834150
-      path: contracts/crowdfunding-campaign.clar
-      anchor-block-only: true
-      clarity-version: 4
-    - transaction-type: contract-publish
-      contract-name: SF-milestone-tracker
-      expected-sender: SP258BY8D71JCTV73A4V3ADPHCVWSBEM6G4FETPYF
-      cost: 4834545
-      path: contracts/milestone-tracker.clar
-      anchor-block-only: true
-      clarity-version: 4
-    - transaction-type: contract-publish
-      contract-name: SF-voting
-      expected-sender: SP258BY8D71JCTV73A4V3ADPHCVWSBEM6G4FETPYF
-      cost: 4833164
-      path: contracts/voting.clar
-      anchor-block-only: true
-      clarity-version: 4
-    epoch: '3.3'
+    - id: 0
+      transactions:
+        - transaction-type: contract-publish
+          contract-name: SF-crowdfunding-campaign
+          expected-sender: SP258BY8D71JCTV73A4V3ADPHCVWSBEM6G4FETPYF
+          cost: 217150
+          path: contracts/crowdfunding-campaign.clar
+          anchor-block-only: true
+          clarity-version: 4
+        - transaction-type: contract-publish
+          contract-name: SF-milestone-tracker
+          expected-sender: SP258BY8D71JCTV73A4V3ADPHCVWSBEM6G4FETPYF
+          cost: 217545
+          path: contracts/milestone-tracker.clar
+          anchor-block-only: true
+          clarity-version: 4
+        - transaction-type: contract-publish
+          contract-name: SF-voting
+          expected-sender: SP258BY8D71JCTV73A4V3ADPHCVWSBEM6G4FETPYF
+          cost: 217164
+          path: contracts/voting.clar
+          anchor-block-only: true
+          clarity-version: 4
+      epoch: "3.3"
